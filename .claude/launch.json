@@ -1,0 +1,23 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "laravel",
+      "runtimeExecutable": "php",
+      "runtimeArgs": ["artisan", "serve", "--host=127.0.0.1", "--port=8010"],
+      "port": 8010
+    },
+    {
+      "name": "laravel-mysql-check",
+      "runtimeExecutable": "php",
+      "runtimeArgs": ["C:/Users/hp/AppData/Local/Temp/claude/D--NonaX/5ec5a6d1-a5d3-41a5-af9e-27debae4959d/scratchpad/serve_mysql.php"],
+      "port": 8011
+    },
+    {
+      "name": "qa-files",
+      "runtimeExecutable": "php",
+      "runtimeArgs": ["-S", "127.0.0.1:8012", "C:/Users/hp/AppData/Local/Temp/claude/D--NonaX/5ec5a6d1-a5d3-41a5-af9e-27debae4959d/scratchpad/qa_router.php"],
+      "port": 8012
+    }
+  ]
+}

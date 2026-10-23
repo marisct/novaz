@@ -1,0 +1,5 @@
+Edited using the built-in image generation tool.
+Prompt: Preserve the existing NovaX book-shaped N, arrow and sparkle. Recolor
+blue/purple to forest green #146b52 with lighter green highlights and dark
+green edges. Remove the glow. Final refinement: preserve the green logo and
+replace all checkerboard/texture with a uniform white background.
