@@ -93,7 +93,9 @@ class InstituteApiController extends Controller
     {
         $page = (int) $request->query('page', 1);
         $student = $request->user()->studentProfile;
-        $audience = $request->user()->role === 'student' ? 'student-'.$request->user()->id : 'staff';
+        $audience = $student
+            ? 'student-'.$request->user()->id.'.v'.\App\Models\ExamAttempt::listVersion($student->id)
+            : 'staff';
 
         return ['data' => Cache::remember(
             'api.exams.'.($type ?? 'all').".{$audience}.page.{$page}",

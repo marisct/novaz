@@ -5,9 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Cache;
 
 class ExamAttempt extends Model
 {
+    /** Cache key suffix for a student's exam list; changes whenever one of their attempts changes. */
+    public static function listVersion(int $studentProfileId): int
+    {
+        return (int) Cache::get("api.exams.version.{$studentProfileId}", 0);
+    }
+
+    protected static function booted(): void
+    {
+        // The app's exam list shows the student's attempt status, so it must refresh after start / submit.
+        // forever, not increment(): the file cache store writes an already-expired entry when incrementing a missing key
+        static::saved(fn (ExamAttempt $attempt) => Cache::forever("api.exams.version.{$attempt->student_profile_id}", static::listVersion($attempt->student_profile_id) + 1));
+    }
+
     protected $fillable = [
         'exam_id', 'student_profile_id', 'started_at', 'current_section_key', 'section_started_at',
         'section_times', 'locked_sections', 'section_scores', 'accuracy_percent', 'submitted_at', 'score',

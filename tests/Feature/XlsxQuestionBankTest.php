@@ -96,6 +96,10 @@ class XlsxQuestionBankTest extends TestCase
         $this->assertSame(60, $exam->duration_minutes);
         $this->assertSame(['quant', 'reasoning', 'english', 'general_awareness'], $pattern->sections->sortBy('position')->pluck('key')->all());
 
+        // The app fetched (and cached) the exam list before the attempt; it must not show a stale status later.
+        $token = $this->postJson('/api/login', ['email' => 'student@nonax.test', 'password' => 'password'])->json('token');
+        $this->assertSame([], $this->withToken($token)->getJson('/api/exams')->assertOk()->json('data.data.0.attempts'));
+
         // One 60-minute paper: the student sees all 100 questions and gives one right and one wrong answer per section.
         $this->actingAs($student)->post("/exams/{$exam->id}/start")->assertRedirect();
         $attempt = ExamAttempt::where('exam_id', $exam->id)->firstOrFail();
@@ -117,8 +121,7 @@ class XlsxQuestionBankTest extends TestCase
         $this->assertSame(92, $attempt->skipped_count);
         $this->assertEquals(4 * 2 - 4 * 0.5, $attempt->score);
 
-        // The app lists the newest exam first and sees the student's submitted attempt on it.
-        $token = $this->postJson('/api/login', ['email' => 'student@nonax.test', 'password' => 'password'])->json('token');
+        // The app lists the newest exam first and sees the student's submitted attempt on it, even though the list was cached.
         $listed = $this->withToken($token)->getJson('/api/exams')->assertOk()->json('data.data');
         $this->assertSame($exam->id, $listed[0]['id']);
         $this->assertSame('submitted', $listed[0]['attempts'][0]['status']);
