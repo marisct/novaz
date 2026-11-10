@@ -7,6 +7,7 @@ use App\Http\Controllers\InstituteController;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome')->name('home');
+Route::view('/privacy', 'privacy')->name('privacy');
 
 // Signed download link used by the mobile app (no session needed, expires).
 Route::get('/materials/{material}/file', [InstituteController::class, 'downloadMaterial'])->middleware('signed')->name('materials.file');

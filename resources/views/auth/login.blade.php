@@ -14,7 +14,7 @@
             <button class="btn btn-primary w-100">Sign in <i data-lucide="arrow-right"></i></button>
         </form>
         <p class="demo-note">Demo accounts: admin@nonax.test, teacher@nonax.test, student@nonax.test.<br>Password: password.</p>
-        <a href="{{ route('home') }}" class="small text-decoration-none"><i data-lucide="arrow-left"></i> Back to NOVA Z</a>
+        <a href="{{ route('home') }}" class="small text-decoration-none"><i data-lucide="arrow-left"></i> Back to NOVA Z</a> <span class="small text-secondary mx-1">&middot;</span> <a href="{{ route('privacy') }}" class="small text-decoration-none">Privacy policy</a>
     </div>
 </div>
 @endsection

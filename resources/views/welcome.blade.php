@@ -42,7 +42,7 @@
     </section>
     <div class="public-band"><section class="public-section"><span class="eyebrow">Your next chapter</span><h2>Ready for your next study session?</h2><p class="intro">Sign in to continue your courses and see your upcoming practice tests.</p><a href="{{ route('login') }}" class="btn btn-primary mt-3">Go to learning portal <i data-lucide="arrow-up-right"></i></a></section></div>
 </main>
-<footer class="public-footer"><strong>NOVA Z Institute</strong><span>Central government competitive exams &amp; bank exam preparation</span><span>&copy; {{ now()->year }} NOVA Z</span></footer>
+<footer class="public-footer"><strong>NOVA Z Institute</strong><span>Central government competitive exams &amp; bank exam preparation</span><a href="{{ route('privacy') }}">Privacy policy</a><span>&copy; {{ now()->year }} NOVA Z</span></footer>
 <script src="{{ asset('js/lucide.min.js') }}"></script><script>window.lucide?.createIcons();</script>
 </body>
 </html>
