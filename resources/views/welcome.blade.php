@@ -42,7 +42,7 @@
     </section>
     <div class="public-band"><section class="public-section"><span class="eyebrow">Your next chapter</span><h2>Ready for your next study session?</h2><p class="intro">Sign in to continue your courses and see your upcoming practice tests.</p><a href="{{ route('login') }}" class="btn btn-primary mt-3">Go to learning portal <i data-lucide="arrow-up-right"></i></a></section></div>
 </main>
-<footer class="public-footer"><strong>NOVA Z Institute</strong><span>Central government competitive exams &amp; bank exam preparation</span><a href="{{ route('privacy') }}">Privacy policy</a><span>&copy; {{ now()->year }} NOVA Z</span></footer>
+<footer class="public-footer"><p class="gov-notice">NOVA Z is a private coaching institute. It is not affiliated with, endorsed by or representing the Staff Selection Commission, the Railway Recruitment Boards or any government organisation. Official sources: <a href="https://ssc.gov.in" rel="noopener" target="_blank">ssc.gov.in</a> &middot; <a href="https://ssc.gov.in/api/attachment/uploads/masterData/NoticeBoards/Notice_of_adv_cgl_2025.pdf" rel="noopener" target="_blank">SSC CGL 2025 notice</a> &middot; <a href="https://indianrailways.gov.in" rel="noopener" target="_blank">indianrailways.gov.in</a></p><strong>NOVA Z Institute</strong><span>Central government competitive exams &amp; bank exam preparation</span><a href="{{ route('privacy') }}">Privacy policy</a><span>&copy; {{ now()->year }} NOVA Z</span></footer>
 <script src="{{ asset('js/lucide.min.js') }}"></script><script>window.lucide?.createIcons();</script>
 </body>
 </html>

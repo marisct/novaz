@@ -364,6 +364,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 11, color: _muted),
                     ),
+                    const SizedBox(height: 18),
+                    const _GovernmentNotice(),
                   ],
                 ),
               ),
@@ -876,6 +878,8 @@ class _HomeTabBody extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           _DataCard(data: normalizeMap(sessionUser)),
+          const SizedBox(height: 20),
+          const _GovernmentNotice(),
         ],
       ),
     };
@@ -963,6 +967,10 @@ class _EndpointTabListState extends State<_EndpointTabList> {
                     subtitle: widget.subtitle,
                     icon: widget.icon,
                   ),
+                  if (widget.showExamCards) ...[
+                    const SizedBox(height: 14),
+                    const _GovernmentNotice(),
+                  ],
                   if (widget.endpoint == '/courses') ...[
                     const SizedBox(height: 18),
                     TextField(
@@ -3038,6 +3046,66 @@ class _DataCard extends StatelessWidget {
                 ),
                 icon: const Icon(Icons.download_outlined, size: 18),
                 label: Text(asText(data['file_name'], fallback: 'Download')),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+}
+
+/// Required by Google Play for apps that show government exam information:
+/// a non-official disclaimer and links to the official sources.
+class _GovernmentNotice extends StatelessWidget {
+  const _GovernmentNotice();
+
+  static const sources = [
+    ('Staff Selection Commission (SSC)', 'https://ssc.gov.in'),
+    (
+      'SSC CGL 2025 notice',
+      'https://ssc.gov.in/api/attachment/uploads/masterData/NoticeBoards/Notice_of_adv_cgl_2025.pdf',
+    ),
+    ('Indian Railways (RRB exams)', 'https://indianrailways.gov.in'),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: const Color(0xFFFFF8E6),
+        border: Border.all(color: const Color(0xFFF1D79A)),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Not a government app',
+            style: TextStyle(fontWeight: FontWeight.w800, color: _ink),
+          ),
+          const SizedBox(height: 6),
+          const Text(
+            'NOVA Z is a private coaching institute app. It is not affiliated with, '
+            'endorsed by or representing the Staff Selection Commission, the Railway '
+            'Recruitment Boards or any government organisation. Always check exam '
+            'details on the official websites:',
+            style: TextStyle(fontSize: 12, height: 1.45, color: _muted),
+          ),
+          const SizedBox(height: 4),
+          for (final (label, url) in sources)
+            TextButton(
+              style: TextButton.styleFrom(
+                padding: const EdgeInsets.symmetric(vertical: 2),
+                minimumSize: const Size(0, 30),
+                alignment: Alignment.centerLeft,
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              ),
+              onPressed: () =>
+                  launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication),
+              child: Text(
+                '$label: ${Uri.parse(url).host}',
+                style: const TextStyle(fontSize: 12, decoration: TextDecoration.underline),
               ),
             ),
         ],
